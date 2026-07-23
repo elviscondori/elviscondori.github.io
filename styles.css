@@ -1079,6 +1079,24 @@ img {
   color: var(--color-text-tertiary);
 }
 
+.site-footer__license {
+  flex-basis: 100%;
+  margin: 0;
+  padding-top: var(--space-4);
+  border-top: var(--border-width-hairline) solid var(--color-border-subtle);
+  font-size: var(--font-size-label);
+  color: var(--color-text-tertiary);
+}
+
+.site-footer__license a {
+  color: var(--color-text-secondary);
+  text-decoration: underline;
+}
+
+.site-footer__license a:hover {
+  color: var(--color-brand);
+}
+
 /* Animación de entrada (activada por script.js) ----------------------------------------------- */
 .reveal--hidden {
   opacity: 0;
