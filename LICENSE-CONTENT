@@ -1,0 +1,39 @@
+Licencia del contenido de la tesis
+===================================
+
+Este archivo cubre el CONTENIDO de la tesis, no el código del sitio.
+El código fuente (HTML, CSS, JavaScript) se distribuye por separado bajo la
+licencia MIT; ver el archivo `LICENSE`.
+
+Obra
+----
+«Reconocimiento y clasificación de objetos usando inteligencia artificial
+basada en SVM y visión estereoscópica»
+Elvis Franks Condori Arias — 2013
+Universidad Nacional de Ingeniería (UNI), Facultad de Ingeniería Mecánica,
+Especialidad de Ingeniería Mecatrónica. Lima, Perú.
+
+Alcance
+-------
+- `assets/condori_ae.pdf` (documento completo de la tesis)
+- Los textos del sitio derivados de la tesis (resumen, objetivos, resultados, etc.)
+
+Licencia
+--------
+Esta obra está licenciada bajo la licencia
+Creative Commons Atribución 4.0 Internacional (CC BY 4.0).
+
+Eres libre de compartir y adaptar el material para cualquier finalidad,
+incluso comercial, siempre que otorgues el crédito correspondiente al autor
+original, indiques si se hicieron cambios y enlaces a la licencia.
+
+Texto completo de la licencia:
+https://creativecommons.org/licenses/by/4.0/deed.es
+Código legal:
+https://creativecommons.org/licenses/by/4.0/legalcode.es
+
+Atribución sugerida
+-------------------
+Condori Arias, E. F. (2013). Reconocimiento y clasificación de objetos usando
+inteligencia artificial basada en SVM y visión estereoscópica [Tesis de título
+profesional, Universidad Nacional de Ingeniería]. Licenciado bajo CC BY 4.0.
