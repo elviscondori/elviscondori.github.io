@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Tesis profesional de Ingeniería Mecatrónica: Reconocimiento y clasificación de objetos usando inteligencia artificial basada en SVM y visión estereoscópica."
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <title>
+      Reconocimiento y clasificación de objetos con SVM y visión estereoscópica
+    </title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link
+      rel="preload"
+      href="assets/fonts/inter-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="#inicio">
+          <svg
+            class="brand__logo"
+            width="32"
+            height="20"
+            viewBox="0 0 34 22"
+            fill="none"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="8.5" stroke="#7A2237" stroke-width="2" />
+            <circle cx="23" cy="11" r="8.5" stroke="#7A2237" stroke-width="2" />
+            <circle cx="11" cy="11" r="2.6" fill="#7A2237" />
+            <circle cx="23" cy="11" r="2.6" fill="#7A2237" />
+          </svg>
+          <span class="brand__name">IA · Visión 3D</span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <button
+            class="site-nav__toggle"
+            aria-expanded="false"
+            aria-controls="nav-menu"
+          >
+            Menú
+          </button>
+          <ul class="site-nav__menu" id="nav-menu">
+            <li><a href="#resumen">Resumen</a></li>
+            <li><a href="#problema">El problema</a></li>
+            <li><a href="#objetivos">Objetivos</a></li>
+            <li><a href="#capitulos">Capítulos</a></li>
+            <li><a href="#resultados">Resultados</a></li>
+            <li><a href="#prezi">Presentación</a></li>
+            <li><a href="#juego">Juego</a></li>
+            <li class="site-nav__cta">
+              <a class="btn btn--primary btn--sm" href="assets/condori_ae.pdf" download>
+                Descargar tesis
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero · portada académica -->
+      <section class="hero" id="inicio">
+        <div class="container">
+          <p class="overline overline--brand reveal">
+            Tesis para optar el título profesional de Ingeniero Mecatrónico
+          </p>
+          <h1 class="hero__title reveal" data-reveal-delay="60">
+            Reconocimiento y clasificación de objetos usando inteligencia
+            artificial basada en SVM y visión estereoscópica
+          </h1>
+          <p class="hero__lead reveal" data-reveal-delay="120">
+            «Enseñar a una máquina a ver y reconocer objetos en 3D» — un
+            sistema de inteligencia artificial que combina visión
+            estereoscópica y SVM.
+          </p>
+
+          <hr class="hero__divider reveal" data-reveal-delay="180" />
+
+          <dl class="hero__meta reveal" data-reveal-delay="220">
+            <div class="hero__meta-item">
+              <dt>Autor</dt>
+              <dd>Elvis Franks Condori Arias</dd>
+            </div>
+            <div class="hero__meta-item">
+              <dt>Asesor</dt>
+              <dd>Ricardo Rodríguez Bustinza</dd>
+            </div>
+            <div class="hero__meta-item">
+              <dt>Institución</dt>
+              <dd>UNI · FIM — Ingeniería Mecatrónica</dd>
+            </div>
+            <div class="hero__meta-item">
+              <dt>Lugar</dt>
+              <dd>Lima, Perú · 2013</dd>
+            </div>
+          </dl>
+
+          <div class="hero__actions reveal" data-reveal-delay="280">
+            <a class="btn btn--primary btn--lg" href="assets/condori_ae.pdf" download>
+              Descargar tesis (PDF)
+            </a>
+            <a class="btn btn--secondary btn--lg" href="#resumen">
+              Leer el resumen
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Epígrafe -->
+      <section class="epigrafe" aria-label="Epígrafe">
+        <div class="container epigrafe__inner">
+          <blockquote class="epigrafe__quote reveal">
+            <p class="epigrafe__text" lang="en">
+              “Reality is nothing more than the capability of our senses to
+              be wrong.”
+            </p>
+            <footer class="epigrafe__attrib">
+              <span class="epigrafe__author">Albert Einstein</span>
+              <span class="epigrafe__traduccion">
+                «La realidad no es más que la capacidad de nuestros sentidos
+                de equivocarse.»
+              </span>
+            </footer>
+          </blockquote>
+          <p class="epigrafe__body reveal" data-reveal-delay="80">
+            Todo lo que sabemos de nuestro entorno lo obtenemos a través de
+            nuestros sentidos: pueden equivocarse y, aun así, son nuestra
+            única vía de acceso a la «realidad». Entre ellos, la vista es el
+            más importante y complejo — dos millones de fibras nerviosas
+            dedicadas a ver, frente a las treinta mil del oído. Por tanto,
+            dotar a una máquina del sentido de la vista supondría un gran
+            avance en su forma de operar.
+          </p>
+        </div>
+      </section>
+
+      <!-- Resumen -->
+      <section class="section section--alt" id="resumen">
+        <div class="container">
+          <p class="overline overline--brand reveal">Resumen</p>
+          <div class="split split--resumen">
+            <div class="reveal" data-reveal-delay="80">
+              <p class="resumen__lead">
+                El sistema busca emular cómo los humanos percibimos la
+                información visual: dos cámaras ópticas actúan como nuestros
+                ojos y un CPU procesa la escena de forma «inteligente».
+              </p>
+              <p class="resumen__body">
+                La compleja tarea de simular la vista se divide en pasos más
+                simples, desde
+                capturar imágenes hasta reconocer objetos en una escena
+                tridimensional. Se usa <strong>visión estereoscópica</strong>
+                para extraer la profundidad a partir de un par de imágenes, y
+                luego <strong>SVM (Support Vector Machine)</strong> para
+                reconocer y clasificar los objetos. El sistema se entrena con
+                ejemplos previos y se evalúa frente a objetos nuevos de la
+                misma clase.
+              </p>
+            </div>
+            <aside class="quote-card reveal" data-reveal-delay="160">
+              <svg
+                class="quote-card__logo"
+                width="34"
+                height="22"
+                viewBox="0 0 34 22"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="8.5" stroke="#7A2237" stroke-width="2" />
+                <circle cx="23" cy="11" r="8.5" stroke="#7A2237" stroke-width="2" />
+                <circle cx="11" cy="11" r="2.6" fill="#7A2237" />
+                <circle cx="23" cy="11" r="2.6" fill="#7A2237" />
+              </svg>
+              <p class="quote-card__text">
+                El SVM es un método potente que, en pocos años desde su
+                introducción, ya ha superado a otras técnicas como las redes
+                neuronales.
+              </p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- El problema · ¿Qué resuelve? -->
+      <section class="section" id="problema">
+        <div class="container">
+          <p class="overline overline--brand reveal">¿Qué resuelve?</p>
+          <div class="split split--problema">
+            <div>
+              <h2 class="section__title reveal" data-reveal-delay="60">
+                Dos cámaras, separadas como nuestros ojos, miran una escena 3D
+                real.
+              </h2>
+              <p class="section__text reveal" data-reveal-delay="120">
+                Dos cámaras separadas a una distancia fija y al mismo nivel
+                horizontal simulan los ojos humanos para capturar una escena
+                tridimensional. La tesis busca demostrar que algoritmos de IA
+                basados en SVM pueden clasificar objetos que ya le fueron
+                enseñados al sistema, a partir de un espacio 3D real.
+              </p>
+            </div>
+            <aside class="pipeline reveal" data-reveal-delay="160">
+              <p class="pipeline__title">Del par de imágenes al objeto</p>
+              <ol class="pipeline__steps">
+                <li class="pipeline__step">
+                  <span class="pipeline__icon">
+                    <svg width="26" height="17" viewBox="0 0 34 22" fill="none" aria-hidden="true">
+                      <circle cx="11" cy="11" r="8.5" stroke="#7A2237" stroke-width="2" />
+                      <circle cx="23" cy="11" r="8.5" stroke="#7A2237" stroke-width="2" />
+                      <circle cx="11" cy="11" r="2.6" fill="#7A2237" />
+                      <circle cx="23" cy="11" r="2.6" fill="#7A2237" />
+                    </svg>
+                  </span>
+                  <span class="pipeline__label">
+                    <strong>Dos cámaras</strong>
+                    <small>Par estereoscópico de la escena</small>
+                  </span>
+                </li>
+                <li class="pipeline__step">
+                  <span class="pipeline__icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M12 3 3 8l9 5 9-5-9-5Z" />
+                      <path d="M3 13l9 5 9-5" />
+                    </svg>
+                  </span>
+                  <span class="pipeline__label">
+                    <strong>Disparidad → profundidad</strong>
+                    <small>Correlación por programación dinámica</small>
+                  </span>
+                </li>
+                <li class="pipeline__step">
+                  <span class="pipeline__icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="4" y="4" width="16" height="16" rx="2" />
+                      <rect x="9" y="9" width="6" height="6" />
+                    </svg>
+                  </span>
+                  <span class="pipeline__label">
+                    <strong>Segmentación</strong>
+                    <small>Detecta posibles objetos</small>
+                  </span>
+                </li>
+                <li class="pipeline__step">
+                  <span class="pipeline__icon pipeline__icon--accent">SVM</span>
+                  <span class="pipeline__label">
+                    <strong>Clasificación</strong>
+                    <small>Reconoce el objeto aprendido</small>
+                  </span>
+                </li>
+              </ol>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- Objetivos -->
+      <section class="section section--alt" id="objetivos">
+        <div class="container">
+          <p class="overline overline--brand reveal">Objetivo general</p>
+          <h2 class="objetivo-general reveal" data-reveal-delay="60">
+            Diseñar un sistema capaz de
+            <span class="objetivo-general__accent">aprender a clasificar objetos</span>
+            del espacio tridimensional real, entrenándolo con ejemplos previos
+            para que se adapte a nuevas situaciones — usando visión
+            estereoscópica e IA basada en SVM en un computador.
+          </h2>
+
+          <p class="overline overline--muted reveal">Objetivos específicos</p>
+          <ol class="objetivos-grid">
+            <li class="card objetivo reveal" data-reveal-delay="40">
+              <div class="objetivo__top">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#48484A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="4" y1="8" x2="20" y2="8" />
+                  <circle cx="9" cy="8" r="2.4" />
+                  <line x1="4" y1="16" x2="20" y2="16" />
+                  <circle cx="15" cy="16" r="2.4" />
+                </svg>
+                <span class="objetivo__num">01</span>
+              </div>
+              <h3 class="objetivo__title">Procesar las imágenes</h3>
+              <p class="objetivo__text">
+                Procesar individualmente las dos imágenes aplicando filtros
+                para luego calcular la disparidad.
+              </p>
+            </li>
+            <li class="card objetivo reveal" data-reveal-delay="80">
+              <div class="objetivo__top">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#48484A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 3 3 8l9 5 9-5-9-5Z" />
+                  <path d="M3 13l9 5 9-5" />
+                </svg>
+                <span class="objetivo__num">02</span>
+              </div>
+              <h3 class="objetivo__title">Obtener la disparidad</h3>
+              <p class="objetivo__text">
+                Calcular la disparidad de las imágenes para extraer la
+                información de profundidad.
+              </p>
+            </li>
+            <li class="card objetivo reveal" data-reveal-delay="120">
+              <div class="objetivo__top">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#48484A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M6 3v14a1 1 0 0 0 1 1h14" />
+                  <path d="M3 6h14a1 1 0 0 1 1 1v14" />
+                </svg>
+                <span class="objetivo__num">03</span>
+              </div>
+              <h3 class="objetivo__title">Segmentar la escena</h3>
+              <p class="objetivo__text">
+                Segmentar la escena para detectar los posibles objetos
+                presentes.
+              </p>
+            </li>
+            <li class="card objetivo reveal" data-reveal-delay="40">
+              <div class="objetivo__top">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#48484A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="4" y="4" width="16" height="16" rx="2" />
+                  <rect x="9" y="9" width="6" height="6" />
+                </svg>
+                <span class="objetivo__num">04</span>
+              </div>
+              <h3 class="objetivo__title">Extraer características</h3>
+              <p class="objetivo__text">
+                Extraer las características de los objetos detectados en la
+                escena.
+              </p>
+            </li>
+            <li class="card objetivo reveal" data-reveal-delay="80">
+              <div class="objetivo__top">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#48484A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="6" y="6" width="12" height="12" rx="1" />
+                  <rect x="9.5" y="9.5" width="5" height="5" />
+                  <path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3" />
+                </svg>
+                <span class="objetivo__num">05</span>
+              </div>
+              <h3 class="objetivo__title">Definir la arquitectura SVM</h3>
+              <p class="objetivo__text">
+                Determinar la arquitectura de SVM más adecuada y sus funciones
+                kernel.
+              </p>
+            </li>
+            <li class="card objetivo reveal" data-reveal-delay="120">
+              <div class="objetivo__top">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#48484A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M16 18l4-6-4-6M8 6l-4 6 4 6" />
+                </svg>
+                <span class="objetivo__num">06</span>
+              </div>
+              <h3 class="objetivo__title">Programar los algoritmos</h3>
+              <p class="objetivo__text">
+                Programar los algoritmos de alto nivel basados en SVM.
+              </p>
+            </li>
+            <li class="card objetivo objetivo--wide reveal" data-reveal-delay="40">
+              <span class="objetivo__badge">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7A2237" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 18a8 8 0 1 1 14 0" />
+                  <path d="M12 14l4-5" />
+                  <circle cx="12" cy="14" r="1.2" fill="#7A2237" stroke="none" />
+                </svg>
+              </span>
+              <p class="objetivo__inline">
+                <span class="objetivo__num">07</span>
+                <strong>Evaluar el desempeño</strong>
+                <span>— presentando objetos en distintas condiciones y situaciones nuevas.</span>
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Capítulos -->
+      <section class="section" id="capitulos">
+        <div class="container">
+          <p class="overline overline--brand reveal">Estructura de la tesis</p>
+          <h2 class="section__title section__title--spaced reveal" data-reveal-delay="60">
+            Seis capítulos, del fundamento teórico a los resultados.
+          </h2>
+
+          <ol class="chapters">
+            <li class="chapters__item reveal">
+              <span class="chapters__num" aria-hidden="true">01</span>
+              <div>
+                <h3 class="chapters__heading">Introducción</h3>
+                <p class="chapters__text">
+                  Antecedentes, justificación, planteamiento del problema y
+                  objetivos.
+                </p>
+              </div>
+            </li>
+            <li class="chapters__item reveal" data-reveal-delay="40">
+              <span class="chapters__num" aria-hidden="true">02</span>
+              <div>
+                <h3 class="chapters__heading">SVM como reconocedor de objetos</h3>
+                <p class="chapters__text">Base teórica del sistema inteligente.</p>
+              </div>
+            </li>
+            <li class="chapters__item reveal" data-reveal-delay="80">
+              <span class="chapters__num" aria-hidden="true">03</span>
+              <div>
+                <h3 class="chapters__heading">Visión estereoscópica</h3>
+                <p class="chapters__text">
+                  Fundamentos usados en las primeras etapas del sistema.
+                </p>
+              </div>
+            </li>
+            <li class="chapters__item reveal">
+              <span class="chapters__num" aria-hidden="true">04</span>
+              <div>
+                <h3 class="chapters__heading">Algoritmos de reconocimiento</h3>
+                <p class="chapters__text">Desarrollo de bajo, medio y alto nivel.</p>
+              </div>
+            </li>
+            <li class="chapters__item reveal" data-reveal-delay="40">
+              <span class="chapters__num" aria-hidden="true">05</span>
+              <div>
+                <h3 class="chapters__heading">Simulaciones y resultados</h3>
+                <p class="chapters__text">Identificación de objetos en las pruebas.</p>
+              </div>
+            </li>
+            <li class="chapters__item chapters__item--last reveal" data-reveal-delay="80">
+              <span class="chapters__num" aria-hidden="true">06</span>
+              <div>
+                <h3 class="chapters__heading">
+                  Discusión, conclusiones y recomendaciones
+                </h3>
+                <p class="chapters__text">
+                  Cierre del trabajo y líneas de continuación.
+                </p>
+              </div>
+            </li>
+          </ol>
+
+          <aside class="inspiracion reveal">
+            <p class="overline overline--on-dark">Inspirado en proyectos reales</p>
+            <p class="inspiracion__lead">
+              El sistema se inspira en hitos de la visión por computador y la
+              robótica que ya «ven» el mundo.
+            </p>
+            <ul class="pills">
+              <li>Mars Rovers — Spirit, Opportunity, Curiosity</li>
+              <li>Google Search by Image</li>
+              <li>Microsoft Kinect</li>
+              <li>Robonaut</li>
+              <li>ASIMO</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Resultados -->
+      <section class="section section--alt" id="resultados">
+        <div class="container">
+          <p class="overline overline--brand reveal">Resultados y hallazgos</p>
+          <h2 class="section__title section__title--spaced reveal" data-reveal-delay="60">
+            SVM y visión estereoscópica logran un elevado porcentaje de
+            aciertos — y se adaptan a lo nuevo.
+          </h2>
+
+          <div class="results-grid">
+            <article class="card result reveal" data-reveal-delay="40">
+              <h3 class="result__title">Aprende y clasifica</h3>
+              <p class="result__text">
+                El sistema basado en SVM aprende de ejemplos previos y luego
+                clasifica de forma binaria objetos nuevos de la misma clase.
+              </p>
+            </article>
+            <article class="card result reveal" data-reveal-delay="80">
+              <h3 class="result__title">Correlación más robusta</h3>
+              <p class="result__text">
+                La programación dinámica en la correlación estereoscópica
+                supera a métodos locales como la correlación por ventanas: más
+                robusta ante regiones ambiguas, aunque con mayor costo
+                computacional.
+              </p>
+            </article>
+            <article class="card result reveal" data-reveal-delay="40">
+              <h3 class="result__title">Segmentación fiable</h3>
+              <p class="result__text">
+                El algoritmo extrae el objeto correctamente y es robusto frente
+                a distorsiones, con la limitación de requerir umbrales
+                manuales.
+              </p>
+            </article>
+            <article class="card result reveal" data-reveal-delay="80">
+              <h3 class="result__title">Características rápidas</h3>
+              <p class="result__text">
+                La extracción de características es de baja complejidad y
+                rápida, lo que mantiene ágil el reconocimiento de alto nivel.
+              </p>
+            </article>
+          </div>
+
+          <aside class="ventaja reveal">
+            <p class="overline overline--on-accent">La ventaja clave</p>
+            <p class="ventaja__lead">
+              La adaptabilidad del sistema es su mayor ventaja frente a
+              soluciones que solo funcionan bajo condiciones fijas.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Aplicaciones futuras -->
+      <section class="section" id="aplicaciones">
+        <div class="container">
+          <p class="overline overline--brand reveal">Aplicaciones futuras</p>
+          <h2 class="section__title reveal" data-reveal-delay="60">
+            Hacia el sector empresarial innovador y el académico.
+          </h2>
+          <p class="section__lead reveal" data-reveal-delay="100">
+            Líneas de continuación propuestas para llevar el sistema más allá
+            del laboratorio.
+          </p>
+
+          <ul class="apps">
+            <li class="app reveal">
+              <span class="app__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A2237" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 21c-4-1-7-5-7-9a5 5 0 0 1 7-4.5A5 5 0 0 1 19 12c0 4-3 8-7 9Z" />
+                  <path d="M12 7V3M12 3c1.5 0 3 .8 3 2" />
+                </svg>
+              </span>
+              <div>
+                <h3 class="app__title">Agricultura</h3>
+                <p class="app__text">
+                  Clasificación de frutos maduros frente a los que aún no son
+                  cosechables.
+                </p>
+              </div>
+            </li>
+            <li class="app reveal" data-reveal-delay="40">
+              <span class="app__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A2237" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 11l19-9-9 19-2-8-8-2Z" />
+                </svg>
+              </span>
+              <div>
+                <h3 class="app__title">Robótica móvil</h3>
+                <p class="app__text">
+                  Navegación de robots evitando obstáculos en entornos reales.
+                </p>
+              </div>
+            </li>
+            <li class="app reveal">
+              <span class="app__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A2237" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3.5 12H7l2-5 3 9 2-4h3.5" />
+                </svg>
+              </span>
+              <div>
+                <h3 class="app__title">Medicina</h3>
+                <p class="app__text">
+                  Endoscopias o cirugía cardiovascular con cámaras
+                  estereoscópicas.
+                </p>
+              </div>
+            </li>
+            <li class="app reveal" data-reveal-delay="40">
+              <span class="app__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A2237" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 3h6M10 3v6l-5 9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1l-5-9V3" />
+                  <path d="M7.5 14h9" />
+                </svg>
+              </span>
+              <div>
+                <h3 class="app__title">Investigación</h3>
+                <p class="app__text">
+                  Servir de base a nuevas investigaciones en visión e IA.
+                </p>
+              </div>
+            </li>
+            <li class="app reveal">
+              <span class="app__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A2237" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M16 18l4-6-4-6M8 6l-4 6 4 6" />
+                </svg>
+              </span>
+              <div>
+                <h3 class="app__title">Reimplementación</h3>
+                <p class="app__text">
+                  Reescribir los algoritmos en Java, Python o C++ para
+                  independizarse de Matlab y ganar velocidad.
+                </p>
+              </div>
+            </li>
+            <li class="app reveal" data-reveal-delay="40">
+              <span class="app__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A2237" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="6" y="6" width="12" height="12" rx="1" />
+                  <path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3" />
+                </svg>
+              </span>
+              <div>
+                <h3 class="app__title">Sistema embebido</h3>
+                <p class="app__text">
+                  Montar el sistema en un robot o en una línea de producción, e
+                  integrar actuadores para que interactúe físicamente con los
+                  objetos.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Presentación de la sustentación (Prezi) -->
+      <section class="section section--alt" id="prezi">
+        <div class="container">
+          <p class="overline overline--brand reveal">Presentación</p>
+          <h2 class="section__title reveal" data-reveal-delay="60">
+            La defensa de la tesis, desarrollada en Prezi.
+          </h2>
+          <p class="section__lead reveal" data-reveal-delay="100">
+            Recorre la presentación interactiva que acompañó la sustentación
+            del trabajo.
+          </p>
+
+          <div class="prezi-card reveal" data-reveal-delay="140">
+            <div class="embed">
+              <iframe
+                class="embed__frame"
+                src="https://prezi.com/view/kStaG9w8PtLGfbiQLIft/embed"
+                title="Presentación Prezi de la sustentación"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+          <p class="prezi-alt reveal">
+            ¿Problemas con el visor?
+            <a
+              href="https://prezi.com/view/kStaG9w8PtLGfbiQLIft/"
+              target="_blank"
+              rel="noopener"
+            >Abrir la presentación en Prezi</a>.
+          </p>
+        </div>
+      </section>
+
+      <!-- Juego interactivo · «Sé el hiperplano» -->
+      <section class="section" id="juego">
+        <div class="container">
+          <p class="overline overline--brand reveal">Juego interactivo</p>
+          <h2 class="section__title reveal" data-reveal-delay="60">
+            Sé el hiperplano: separa los objetos como lo haría el SVM.
+          </h2>
+          <p class="section__lead reveal" data-reveal-delay="100">
+            Cada punto es un objeto visto por el sistema, ubicado según sus
+            características. Traza una línea arrastrando sobre el plano para
+            separar las tuercas de los tornillos, y compara tu solución con la
+            del SVM.
+          </p>
+
+          <div class="juego-grid">
+            <div class="juego-board reveal" data-reveal-delay="140">
+              <div class="juego-board__lienzo">
+                <canvas
+                  id="juego-canvas"
+                  aria-label="Plano de características para trazar la línea separadora"
+                ></canvas>
+                <div class="juego-board__overlay" id="juego-overlay">
+                  <button class="btn btn--primary btn--lg" id="juego-jugar" type="button">
+                    Jugar
+                  </button>
+                </div>
+              </div>
+              <div class="juego-board__legend">
+                <span>
+                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+                    <circle cx="7" cy="7" r="5.5" fill="#7A2237" />
+                  </svg>
+                  Tuercas
+                </span>
+                <span>
+                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+                    <rect x="2" y="2" width="10" height="10" rx="2" fill="#2E6FB0" />
+                  </svg>
+                  Tornillos
+                </span>
+                <span>
+                  <svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true">
+                    <line x1="1" y1="12" x2="17" y2="2" stroke="#48484A" stroke-width="2" />
+                  </svg>
+                  Tu línea
+                </span>
+                <span>
+                  <svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true">
+                    <line x1="1" y1="12" x2="17" y2="2" stroke="#7A2237" stroke-width="2" stroke-dasharray="4 3" />
+                  </svg>
+                  Solución del SVM
+                </span>
+              </div>
+            </div>
+
+            <aside
+              class="juego-panel reveal"
+              data-reveal-delay="200"
+              aria-label="Marcador y controles del juego"
+            >
+              <p class="juego-panel__title">Tu resultado</p>
+              <div class="juego-stats">
+                <div class="juego-stat">
+                  <span class="juego-stat__label">Precisión</span>
+                  <span class="juego-stat__value" id="juego-precision">—</span>
+                </div>
+                <div class="juego-stat">
+                  <span class="juego-stat__label">Margen vs. SVM</span>
+                  <span class="juego-stat__value" id="juego-margen">—</span>
+                </div>
+                <div class="juego-stat juego-stat--ancho">
+                  <span class="juego-stat__label">Puntaje</span>
+                  <span class="juego-stat__value juego-stat__value--brand" id="juego-puntaje">—</span>
+                </div>
+              </div>
+              <p class="juego-mensaje" id="juego-mensaje">
+                Pulsa «Jugar» y arrastra sobre el plano para trazar tu línea
+                separadora.
+              </p>
+              <button
+                class="btn btn--primary btn--lg juego-panel__btn"
+                id="juego-btn-svm"
+                type="button"
+                disabled
+              >
+                Ver la solución del SVM
+              </button>
+              <button
+                class="btn btn--secondary btn--lg juego-panel__btn"
+                id="juego-btn-nueva"
+                type="button"
+              >
+                Nueva ronda
+              </button>
+            </aside>
+          </div>
+
+          <div class="juego-notas">
+            <article class="juego-nota reveal">
+              <h3 class="juego-nota__title">El margen</h3>
+              <p class="juego-nota__text">
+                Muchas líneas separan bien los datos, pero no todas son igual
+                de confiables. El margen es la distancia entre la línea y los
+                puntos más cercanos: cuanto más ancho, mejor tolera el
+                clasificador objetos nuevos y ruidosos.
+              </p>
+            </article>
+            <article class="juego-nota reveal" data-reveal-delay="40">
+              <h3 class="juego-nota__title">Los vectores de soporte</h3>
+              <p class="juego-nota__text">
+                Al ver la solución, los puntos con anillo son los vectores de
+                soporte: los únicos que determinan la posición de la línea
+                óptima. El resto de los puntos podría moverse sin cambiar el
+                resultado.
+              </p>
+            </article>
+            <article class="juego-nota reveal" data-reveal-delay="80">
+              <h3 class="juego-nota__title">En la tesis</h3>
+              <p class="juego-nota__text">
+                El sistema desarrollado hace exactamente esto, pero con más
+                características y en más dimensiones: un SVM entrenado con
+                descriptores de forma clasifica los objetos vistos por las
+                cámaras estereoscópicas.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sobre el trabajo · descarga y cita -->
+      <section class="section section--alt" id="descargar">
+        <div class="container">
+          <div class="split split--descarga">
+            <div class="reveal">
+              <p class="overline overline--brand">Sobre el trabajo</p>
+              <h2 class="section__title">Descarga la tesis completa.</h2>
+              <p class="section__text descarga__text">
+                El documento íntegro reúne el fundamento teórico, los
+                algoritmos, las simulaciones y los resultados del sistema de
+                reconocimiento.
+              </p>
+              <a class="btn btn--primary btn--lg" href="assets/condori_ae.pdf" download>
+                Descargar tesis (PDF)
+              </a>
+            </div>
+            <aside class="cita-card reveal" data-reveal-delay="80">
+              <p class="overline overline--muted">Cómo citar</p>
+              <p class="cita-card__text">
+                Condori Arias, E. F. (2013).
+                <em>Reconocimiento y clasificación de objetos usando
+                inteligencia artificial basada en SVM y visión
+                estereoscópica</em>
+                [Tesis de título profesional, Universidad Nacional de
+                Ingeniería]. Facultad de Ingeniería Mecánica — Especialidad de
+                Ingeniería Mecatrónica. Lima, Perú.
+              </p>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__author">
+          <svg width="30" height="19" viewBox="0 0 34 22" fill="none" aria-hidden="true">
+            <circle cx="11" cy="11" r="8.5" stroke="#7A2237" stroke-width="2" />
+            <circle cx="23" cy="11" r="8.5" stroke="#7A2237" stroke-width="2" />
+            <circle cx="11" cy="11" r="2.6" fill="#7A2237" />
+            <circle cx="23" cy="11" r="2.6" fill="#7A2237" />
+          </svg>
+          <span>
+            &copy; <span id="anio-actual">2013</span> Elvis Franks Condori
+            Arias · Ingeniería Mecatrónica
+          </span>
+        </p>
+        <a class="site-footer__mail" href="mailto:elviscondori7@gmail.com">
+          elviscondori7@gmail.com
+        </a>
+        <p class="site-footer__uni">
+          Universidad Nacional de Ingeniería · Lima, Perú · 2013
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="js/juego.js"></script>
+  </body>
+</html>
